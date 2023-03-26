@@ -1,0 +1,23 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.0.6",
+    "discord.js": "^14.7.1",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.41",
+    "node-fetch": "^3.2.6"
+  },
+  "devDependencies": {
+    "node": "^17.0.1"
+  },
+  "description": ""
+}
