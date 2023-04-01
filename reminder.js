@@ -29,6 +29,8 @@ let channel;
 //setTimeout Function.
 let myTimeout;
 
+//Stores User's reminders
+let displayReminders = ' ';
 let rtReminders;
 
 //Clears setTimeout Function.
@@ -116,6 +118,7 @@ const checkReminder = () => {
         let personsName = person;
         let reminder = r.reminder;
         rtReminders = r.reminder;
+        displayReminders = r.reminder + ', ' + displayReminders;
         let time = r.time;
 
         //Sends Reminder to the Chat the Reminder was set at.
@@ -429,6 +432,7 @@ bot.on('messageCreate', reminder => {
     let reminderDeleted = reminder.content;
     //Removes !d: Command from the Reminder the User want Deleted.
     let removeReminderDeleted = reminderDeleted.replace('!d:', '');
+    channel.send(removeReminderDeleted + ' has been removed from your reminders.');
 
     if (!reminderMap.has(userName)) {
       return;
@@ -438,6 +442,9 @@ bot.on('messageCreate', reminder => {
     if (rtReminders == removeReminderDeleted) {
       clearTimeout(myTimeout);
       rtReminders = undefined;
+    }
+    if (displayReminders.includes(removeReminderDeleted)) {
+      displayReminders = displayReminders.replace(removeReminderDeleted + ', ', '');
     }
 
     for (userReminderandTime of reminderMap.get(userName)) {
@@ -457,8 +464,6 @@ bot.on('messageCreate', reminder => {
   //Shows User their Reminders 
   //If the Message starts with !rmd the Command is activated.
   if (reminder.content.startsWith('!rmd')) {
-    //Stores User's reminders
-    let displayReminders = ' ';
 
     //If the User has no Reminders stores/shows a Blank.
     if (reminderMap.get(userName) == undefined) {
